@@ -6,7 +6,9 @@ class MySliverAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: NestedScrollView(
+      body: DefaultTabController(
+        length: 3,
+        child: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverAppBar(
@@ -42,6 +44,31 @@ class MySliverAppBar extends StatelessWidget {
                   ),
                 ),
               ),
+              SliverPadding(
+                padding: EdgeInsets.all(8.0),
+                sliver: SliverList(
+                  delegate: SliverChildListDelegate([
+                    TabBar(
+                      labelColor: Colors.black87,
+                      unselectedLabelColor: Colors.grey,
+                      tabs: [
+                        Tab(
+                          icon: Icon(Icons.audiotrack),
+                          text: 'Songs',
+                        ),
+                        Tab(
+                          icon: Icon(Icons.collections),
+                          text: 'Albums',
+                        ),
+                        Tab(
+                          icon: Icon(Icons.bookmark),
+                          text: 'Favourites',
+                        ),
+                      ],
+                    ),
+                  ]),
+                ),
+              ),
             ];
           },
           body: Center(
@@ -49,7 +76,9 @@ class MySliverAppBar extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[Text('Belajar Custom SliverAppBar')],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }
